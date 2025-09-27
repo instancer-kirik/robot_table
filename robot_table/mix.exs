@@ -35,6 +35,20 @@ defmodule RobotTable.MixProject do
       {:ring_logger, "~> 0.11.0"},
       {:toolshed, "~> 0.4.0"},
 
+      # Phoenix web interface
+      {:phoenix, "~> 1.7.14"},
+      {:phoenix_html, "~> 4.1"},
+      {:phoenix_live_view, "~> 0.20.2"},
+      {:phoenix_live_dashboard, "~> 0.8.3"},
+      {:jason, "~> 1.4"},
+      {:bandit, "~> 1.5"},
+
+      # Industrial networking and protocols
+      {:tortoise, "~> 0.10.0"},  # MQTT client
+      {:circuits_gpio, "~> 2.0"},
+      {:circuits_spi, "~> 2.0"},
+      {:circuits_i2c, "~> 2.0"},
+
       # Allow Nerves.Runtime on host to support development, testing and CI.
       # See config/host.exs for usage.
       {:nerves_runtime, "~> 0.13.0"},

@@ -9,6 +9,22 @@ defmodule RobotTable.Application do
   def start(_type, _args) do
     children =
       [
+        # Core safety system - highest priority
+        RobotTable.SafetySystem,
+
+        # Alarm management
+        {RobotTable.AlarmManager, []},
+
+        # Network connectivity
+        RobotTable.NetworkManager,
+
+        # Motion control systems
+        RobotTable.MotionControl.TableController,
+        RobotTable.GrinderController,
+
+        # Data logging and telemetry
+        {RobotTable.DataLogger, []},
+
         # Children for all targets
         # Starts a worker by calling: RobotTable.Worker.start_link(arg)
         # {RobotTable.Worker, arg},
@@ -24,6 +40,13 @@ defmodule RobotTable.Application do
   if Mix.target() == :host do
     defp target_children() do
       [
+        # Phoenix web interface for development
+        {Phoenix.PubSub, name: RobotTable.PubSub},
+        RobotTableWeb.Endpoint,
+
+        # Development-only services
+        {RobotTable.DevelopmentMode, []},
+
         # Children that only run on the host during development or test.
         # In general, prefer using `config/host.exs` for differences.
         #
@@ -34,6 +57,18 @@ defmodule RobotTable.Application do
   else
     defp target_children() do
       [
+        # Phoenix web interface for production
+        {Phoenix.PubSub, name: RobotTable.PubSub},
+        RobotTableWeb.Endpoint,
+
+        # Industrial networking protocols
+        {RobotTable.MqttClient, []},
+        {RobotTable.ModbusServer, []},
+
+        # Hardware monitoring services
+        {RobotTable.HardwareMonitor, []},
+        {RobotTable.VibrationAnalyzer, []},
+
         # Children for all targets except host
         # Starts a worker by calling: Target.Worker.start_link(arg)
         # {Target.Worker, arg},
