@@ -1,8 +1,8 @@
 defmodule NervesSystemRpi5.MixProject do
   use Mix.Project
 
-  @github_organization "nerves-project"
-  @app :nerves_system_rpi5
+  @github_organization "instancer-kirik"
+  @app :nerves_system_rpi5_industrial
   @source_url "https://github.com/#{@github_organization}/#{@app}"
   @version Path.join(__DIR__, "VERSION")
            |> File.read!()
@@ -17,6 +17,7 @@ defmodule NervesSystemRpi5.MixProject do
       compilers: Mix.compilers() ++ [:nerves_package],
       nerves_package: nerves_package(),
       description: description(),
+      name: "Robot Table Industrial System",
       package: package(),
       deps: deps(),
       aliases: [loadconfig: [&bootstrap/1]],
@@ -42,7 +43,7 @@ defmodule NervesSystemRpi5.MixProject do
     [
       type: :system,
       artifact_sites: [
-        {:github_releases, "#{@github_organization}/#{@app}"}
+        {:github_releases, "#{@github_organization}/nerves_system_rpi5"}
       ],
       build_runner_opts: build_runner_opts(),
       platform: Nerves.System.BR,
@@ -75,7 +76,7 @@ defmodule NervesSystemRpi5.MixProject do
   end
 
   defp description do
-    "Nerves System - Raspberry Pi 5 (64-bits)"
+    "Industrial Nerves System - Raspberry Pi 5 (64-bits) for Robot Table Automation"
   end
 
   defp docs do
@@ -96,7 +97,7 @@ defmodule NervesSystemRpi5.MixProject do
       links: %{
         "GitHub" => @source_url,
         "REUSE Compliance" =>
-          "https://api.reuse.software/info/github.com/nerves-project/nerves_system_rpi5"
+          "https://api.reuse.software/info/github.com/instancer-kirik/nerves_system_rpi5"
       }
     ]
   end
@@ -105,6 +106,7 @@ defmodule NervesSystemRpi5.MixProject do
     [
       "fwup_include",
       "rootfs_overlay",
+      "robot_table",
       "CHANGELOG.md",
       "cmdline.txt",
       "config.txt",

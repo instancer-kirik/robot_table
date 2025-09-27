@@ -1,0 +1,57 @@
+# The directory Mix will write compiled artifacts to.
+/_build/
+
+# If you run "mix test --cover", coverage assets end up here.
+/cover/
+
+# The directory Mix downloads your dependencies sources to.
+/deps/
+
+# Where third-party dependencies like ExDoc output generated docs.
+/doc/
+
+# Ignore .fetch files in case you like to edit your project deps locally.
+/.fetch
+
+# If the VM crashes, it generates a dump, let's ignore it too.
+erl_crash.dump
+
+# Temporary files, for example, from tests.
+/tmp/
+
+# Nerves-specific ignores
+*.fw
+*.img
+*.tar.gz
+/rel/
+/.nerves/
+
+# Firmware upload scripts
+upload.sh
+
+# SSL certificates and keys
+*.pem
+*.key
+*.crt
+
+# Environment-specific config
+.env
+.env.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Hardware test logs
+hardware_test.log
+calibration_data.json
+
+# Production secrets
+prod.secret.exs

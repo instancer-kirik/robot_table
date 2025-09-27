@@ -4,7 +4,7 @@
 [![CI](https://github.com/nerves-project/nerves_system_rpi5/actions/workflows/ci.yml/badge.svg)](https://github.com/nerves-project/nerves_system_rpi5/actions/workflows/ci.yml)
 [![REUSE status](https://api.reuse.software/badge/github.com/nerves-project/nerves_system_rpi5)](https://api.reuse.software/info/github.com/nerves-project/nerves_system_rpi5)
 
-This is the base Nerves System configuration for the Raspberry Pi 5 Model B.
+This is a custom industrial Nerves System configuration for the Raspberry Pi 5, specifically designed for the Robot Table Industrial Automation System with safety-critical control of heavy machinery including motorized table positioning and 9-inch grinder integration.
 
 ![Raspberry Pi 5 image](assets/images/RaspberryPi_5B.svg)
 <br><sup>[Efa / Wikimedia Commons / CC BY-SA
@@ -30,12 +30,30 @@ This is the base Nerves System configuration for the Raspberry Pi 5 Model B.
 
 ## Using
 
-The most common way of using this Nerves System is create a project with `mix
-nerves.new` and to export `MIX_TARGET=rpi5`. See the [Getting started
-guide](https://hexdocs.pm/nerves/getting-started.html#creating-a-new-nerves-app)
-for more information.
+This system is designed specifically for the Robot Table Industrial Automation project. To use:
 
-If you need custom modifications to this system for your device, clone this
+1. **Clone this repository**
+   ```bash
+   git clone https://github.com/instancer-kirik/nerves_system_rpi5.git
+   cd nerves_system_rpi5
+   ```
+
+2. **Build the Robot Table application**
+   ```bash
+   cd robot_table
+   export MIX_TARGET=rpi5
+   mix deps.get
+   mix firmware
+   mix burn  # or mix upload <device_ip>
+   ```
+
+3. **For custom modifications** - This system includes industrial-specific configurations for:
+   - Real-time kernel patches for <50ms safety response
+   - Extended GPIO configurations for safety systems
+   - Motor controller SPI interfaces
+   - Industrial networking protocols
+
+See the [Robot Table documentation](robot_table/README.md) for complete usage instructions.
 repository and update as described in [Making custom
 systems](https://hexdocs.pm/nerves/customizing-systems.html).
 
