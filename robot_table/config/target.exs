@@ -57,6 +57,20 @@ config :vintage_net,
     {"wlan0", %{type: VintageNetWiFi}}
   ]
 
+# Configure Phoenix for target deployment
+config :robot_table, RobotTableWeb.Endpoint,
+  http: [ip: {0, 0, 0, 0}, port: 80],
+  https: [
+    ip: {0, 0, 0, 0},
+    port: 443,
+    cipher_suite: :strong,
+    certfile: "/data/ssl/cert.pem",
+    keyfile: "/data/ssl/key.pem"
+  ],
+  secret_key_base: "INDUSTRIAL_ROBOT_TABLE_SECRET_KEY_BASE_CHANGE_IN_PRODUCTION_128_CHARS_LONG_FOR_SECURITY_AND_PROPER_ENCRYPTION_STRENGTH",
+  server: true,
+  check_origin: false
+
 config :mdns_lite,
   # The `hosts` key specifies what hostnames mdns_lite advertises.  `:hostname`
   # advertises the device's hostname.local. For the official Nerves systems, this

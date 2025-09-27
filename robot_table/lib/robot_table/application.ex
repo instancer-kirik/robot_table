@@ -13,7 +13,7 @@ defmodule RobotTable.Application do
         RobotTable.SafetySystem,
 
         # Alarm management
-        {RobotTable.AlarmManager, []},
+        RobotTable.AlarmManager,
 
         # Network connectivity
         RobotTable.NetworkManager,
@@ -21,9 +21,6 @@ defmodule RobotTable.Application do
         # Motion control systems
         RobotTable.MotionControl.TableController,
         RobotTable.GrinderController,
-
-        # Data logging and telemetry
-        {RobotTable.DataLogger, []},
 
         # Children for all targets
         # Starts a worker by calling: RobotTable.Worker.start_link(arg)
@@ -44,9 +41,6 @@ defmodule RobotTable.Application do
         {Phoenix.PubSub, name: RobotTable.PubSub},
         RobotTableWeb.Endpoint,
 
-        # Development-only services
-        {RobotTable.DevelopmentMode, []},
-
         # Children that only run on the host during development or test.
         # In general, prefer using `config/host.exs` for differences.
         #
@@ -60,14 +54,6 @@ defmodule RobotTable.Application do
         # Phoenix web interface for production
         {Phoenix.PubSub, name: RobotTable.PubSub},
         RobotTableWeb.Endpoint,
-
-        # Industrial networking protocols
-        {RobotTable.MqttClient, []},
-        {RobotTable.ModbusServer, []},
-
-        # Hardware monitoring services
-        {RobotTable.HardwareMonitor, []},
-        {RobotTable.VibrationAnalyzer, []},
 
         # Children for all targets except host
         # Starts a worker by calling: Target.Worker.start_link(arg)
